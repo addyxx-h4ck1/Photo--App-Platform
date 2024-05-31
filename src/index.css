@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  color-scheme: light dark;
+  background-color: #1b1b1b;
+}
+
+@layer utilities {
+  .menu-btn {
+    display: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    .navbar-links {
+      display: none;
+    }
+
+    :root {
+      color-scheme: light dark;
+      background-color: #1b1b1b;
+    }
+
+    .menu-btn {
+      display: block;
+    }
+
+    .navbar-container {
+      justify-content: space-between;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .sidebar {
+      display: none;
+    }
+  }
+
+  .action-background {
+    background: rgb(34, 193, 195);
+    background: linear-gradient(0deg, #22c1c3 0%, rgba(253, 187, 45, 1) 100%);
+  }
+
+  .top-sec {
+    background: rgb(11, 46, 46);
+    background: linear-gradient(180deg, rgba(11, 46, 46, 1) 0%, rgba(27, 27, 27, 1) 72%);
+  }
+
+  .counter-wrapper {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 10px;
+  }
+
+  .trending {
+    background: rgb(11, 46, 46);
+    background: radial-gradient(circle, rgba(11, 46, 46, 1) 0%, rgba(27, 27, 27, 1) 30%);
+  }
+
+  @media screen and (max-width: 801px) {
+    .trending {
+      flex-direction: column-reverse;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .artist {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .trending div:last-child {
+      width: 100%;
+      text-align: center;
+    }
+
+    .artist-text {
+      width: 100%;
+      text-align: center;
+    }
+
+    .artist-text h1 {
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .trending-cards {
+      width: 95%;
+    }
+
+    .trendy img {
+      height: 200px;
+    }
+  }
+
+  .trending-cards {
+    padding: .2rem;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    gap: .8rem;
+
+  }
+
+  @media screen and (max-width: 700px) {
+    .newsletter {
+      margin: 0;
+    }
+
+    .newsletter article {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .newsletter article h1 {
+      font-size: 30px;
+      line-height: 2.5rem;
+    }
+  }
+
+  footer {
+    background: rgb(11, 46, 46);
+    background: linear-gradient(0deg, rgba(11, 46, 46, 1) 0%, rgba(27, 27, 27, 1) 43%);
+  }
+
+  .footer-wrapper {
+    display: grid !important;
+    row-gap: 2rem;
+    column-gap: 2rem;
+
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+  }
+}
+
+@layer components {}
