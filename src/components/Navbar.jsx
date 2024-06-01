@@ -1,6 +1,6 @@
 import React from 'react'
 import Sidebar from './Sidebar'
-
+import icon from '../assets/Photography-Logos-removebg-preview.png'
 const Navbar = (props) => {
   const { sidebarActions } = props
 
@@ -8,7 +8,7 @@ const Navbar = (props) => {
     <article className="navbar-container bg-primary z-50 mb-3 flex justify-around items-center text-[17px] sticky top-0 px-5 py-2">
       <div className="navbar-logo flex">
         <img
-          src="/src/assets/Photography-Logos-removebg-preview.png"
+          src={icon}
           alt="logo"
           className="aspect-[1/1] w-[100px] h-[40px] object-cover "
         />
