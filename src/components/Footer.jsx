@@ -2,13 +2,17 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <footer className="footer mt-[2rem] flex flex-col justify-center items-center p-5 text-sm">
-      <div className="footer-wrapper w-full max-w-[1300px]">
+    <footer className="footer mt-[2rem] flex flex-col justify-center items-center p-5 text-sm ">
+      <div className="footer-wrapper w-full max-w-[1300px] ">
         <div className="firstt">
-          <h1 className="font-bold text-2xl mb-3">PhotoLab</h1>
+          <div className="footer-logo flex">
+            <h1 className="text-3xl mb-3">
+              Pixel<span className="line-through text-4xl">R</span>art
+            </h1>
+            <i className="fa fa-trademark text-xs"></i>
+          </div>
           <p className="text-sm mb-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
-            impedit praesentium libero quod hic. Consequuntur atque cumque,
+            Join us today and make every shot tell a story.
           </p>
           <div className="footer-links flex gap-5">
             <a href="" className=" text-[20px]">
@@ -29,9 +33,9 @@ const Footer = () => {
           <h1 className="font-semibold mb-2 text-[aqua]">Explore</h1>
           <div className="links flex flex-col gap-2">
             <a href="">Art</a>
-            <a href="">Art</a>
-            <a href="">Art</a>
-            <a href="">Art</a>
+            <a href="">Collectibles</a>
+            <a href="">Domain Name</a>
+            <a href="">Utility</a>
           </div>
         </div>
         <div className="third">
@@ -58,6 +62,16 @@ const Footer = () => {
             <a href="">Get Started</a>
           </div>
         </div>
+      </div>
+      <div className="mt-[2rem] text-sm portrait:text-xs text-center">
+        copyright &copy; {new Date().getFullYear()} | PhotoLab |{' '}
+        <a
+          href="https:solo.to/briann_bn"
+          target="_blank"
+          className="text-[aqua]"
+        >
+          briann_bn
+        </a>
       </div>
     </footer>
   )

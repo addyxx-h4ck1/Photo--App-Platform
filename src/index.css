@@ -6,6 +6,7 @@
 :root {
   color-scheme: light dark;
   background-color: #1b1b1b;
+  color: #c5c3c3;
 }
 
 @layer utilities {
@@ -16,11 +17,6 @@
   @media screen and (max-width: 768px) {
     .navbar-links {
       display: none;
-    }
-
-    :root {
-      color-scheme: light dark;
-      background-color: #1b1b1b;
     }
 
     .menu-btn {
@@ -54,6 +50,12 @@
     border-radius: 10px;
   }
 
+  @media screen and (max-width: 450px) {
+    .counter-wrapper {
+      flex-direction: column-reverse !important;
+    }
+  }
+
   .trending {
     background: rgb(11, 46, 46);
     background: radial-gradient(circle, rgba(11, 46, 46, 1) 0%, rgba(27, 27, 27, 1) 30%);
@@ -74,6 +76,11 @@
 
     .trending div:last-child {
       width: 100%;
+      text-align: center;
+    }
+
+    .trending div:last-child h1 {
+      max-width: 100%;
       text-align: center;
     }
 
@@ -102,6 +109,32 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
     gap: .8rem;
 
+  }
+
+  .artist .trending-cards {
+    padding: .2rem;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    gap: .8rem;
+
+  }
+
+  @media screen and (max-width: 473px) {
+    .trending-cards {
+      padding: .2rem;
+      display: grid !important;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)) !important;
+      gap: .8rem;
+    }
+
+    .trendy img {
+      height: 140px;
+    }
+
+    .artist .profile {
+      width: 70px;
+      height: 70px;
+    }
   }
 
   @media screen and (max-width: 700px) {
@@ -135,6 +168,74 @@
 
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
   }
+
+  .footer-logo {
+    background: -webkit-linear-gradient(#c1c0c0, rgb(0, 92, 92));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+
+  /* brands slider */
+  .brands-wrapper {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    mask-image: linear-gradient(to right,
+        rgba(6, 48, 51, 0),
+        rgb(64, 12, 12) 20%,
+        rgb(45, 10, 10) 80%,
+        rgba(233, 32, 32, 0));
+
+  }
+
+  .brand-item {
+    position: absolute;
+    left: max(calc(120px * 7), 100%);
+    animation-name: scroll-left;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 30s;
+  }
+
+  .brand-item-1 {
+    animation-delay: calc(30s / 7 * (7 - 1) * -1);
+  }
+
+  .brand-item-2 {
+    animation-delay: calc(30s / 7 * (7 - 2) * -1);
+  }
+
+  .brand-item-3 {
+    animation-delay: calc(30s / 7 * (7 - 3) * -1);
+  }
+
+  .brand-item-4 {
+    animation-delay: calc(30s / 7 * (7 - 4) * -1);
+  }
+
+  .brand-item-5 {
+    animation-delay: calc(30s / 7 * (7 - 5) * -1);
+  }
+
+  .brand-item-6 {
+    animation-delay: calc(30s / 7 * (7 - 6) * -1);
+  }
+
+  .brand-item-7 {
+    animation-delay: calc(30s / 7 * (7 - 7) * -1);
+  }
+
+  @keyframes scroll-left {
+    to {
+      left: -120px;
+    }
+  }
+
+  /* brands slider */
 }
 
 @layer components {}

@@ -6,8 +6,13 @@ const Navbar = (props) => {
 
   return (
     <article className="navbar-container bg-primary z-50 mb-3 flex justify-around items-center text-[17px] sticky top-0 px-5 py-2">
-      <div className="navbar-logo">
-        <h1 className="font-bold text-2xl">PhotoLab</h1>
+      <div className="navbar-logo flex">
+        <img
+          src="src/assets/Photography-Logos-removebg-preview.png"
+          alt="logo"
+          className="aspect-[1/1] w-[100px] h-[40px] object-cover "
+        />
+        <i className="fa fa-trademark text-xs"></i>
       </div>
       <div className="navbar-links flex gap-6 items-center text-nowrap">
         <p>Collection</p>
