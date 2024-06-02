@@ -4,7 +4,9 @@ import SideMenu from '../components/Side-Menu'
 import SponsoredMenu from '../components/Sponsored-Menu'
 import AllPosts from '../components/Posts'
 import SideMenuMobile from '../components/Side-menu-Mobile'
-const UserAccount = () => {
+import { Outlet } from 'react-router-dom'
+
+const PixelrArtMainPage = () => {
   const [showsideBar, setShowSideBar] = useState(false)
   return (
     <>
@@ -37,11 +39,7 @@ const UserAccount = () => {
               setShowSideBar(!showsideBar)
             }}
           >
-            {showsideBar ? (
-              <i className="fa fa-times"></i>
-            ) : (
-              <i className="fa fa-bars"></i>
-            )}
+            <i className={`fa ${showsideBar ? 'fa-times' : 'fa-bars'}`}></i>
           </button>
         </div>
         {/* SIDEBAR */}
@@ -51,7 +49,7 @@ const UserAccount = () => {
       {/* CONTENT */}
       <main className="content-container relative flex justify-between gap-[.5rem] ">
         <SideMenu />
-        <AllPosts />
+        <Outlet />
         <section className="sponsored-parent">
           <SponsoredMenu />
         </section>
@@ -60,4 +58,4 @@ const UserAccount = () => {
   )
 }
 
-export default UserAccount
+export default PixelrArtMainPage

@@ -291,7 +291,16 @@
     padding-right: 1rem;
   }
 
+  a.active {
+    color: #01b5b5;
+    background-color: #5352524c;
+  }
+
   /*  */
 }
 
-@layer components {}
+@layer utilities {
+  .navlink {
+    @apply p-3 font-semibold hover:bg-[#5352524c] hover:duration-300 duration-300 rounded-lg
+  }
+}

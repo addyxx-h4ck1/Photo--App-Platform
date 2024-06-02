@@ -5,7 +5,7 @@ import Post from './Post'
 
 const AllPosts = () => {
   return (
-    <section className="posts-parent duration-500 hover:duration-500 p-3 right-0 w-[43%] min-w-[350px]  flex items-center flex-col gap-4">
+    <section className="posts-parent duration-500 hover:duration-500 p-3 right-0 w-[45%] min-w-[350px]  flex items-center  flex-col gap-4">
       <div className="flex flex-col">
         {/* Filter category */}
         <p className="mt-2 text-[#8080807e] text-center">filter</p>
