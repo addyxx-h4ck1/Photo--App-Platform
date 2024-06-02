@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 const Home = () => {
   return (
     <>
@@ -21,7 +22,7 @@ const Home = () => {
           </p>
           <div className="flex gap-7 text-nowrap">
             <button className="top-btn duration-500 hover:duration-500 hover:border-[#22c1c3] py-2 px-4 hover:bg-[#22c1c3] border-[0.5px] rounded-3xl hover:text-primary font-semibold">
-              Get Started
+              <Link to="/posts"> Get Started</Link>
             </button>
             <button className="duration-500 hover:duration-500  py-3 px-4 rounded-3xl hover:text-[#22c1c3] text-md">
               learn more <i className="fa fa-arrow-right-long"></i>

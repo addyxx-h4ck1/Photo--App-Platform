@@ -236,6 +236,62 @@
   }
 
   /* brands slider */
+
+  /*  */
+  @media screen and (max-width: 900px) {
+    .sponsored-parent {
+      display: none !important;
+    }
+
+    .posts-parent {
+      flex-grow: 1;
+      min-width: 0;
+    }
+
+    .content-container h1 {
+      font-size: 15px;
+    }
+
+    .content-container p {
+      font-size: 13px;
+    }
+
+    .side-menu a {
+      font-size: 15px;
+      padding: 10px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .sponsored-parent {
+      display: none !important;
+    }
+
+    .posts-parent {
+      flex-grow: 1;
+      min-width: 0;
+    }
+
+    .side-menu {
+      min-width: 180px;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+
+    .side-menu,
+    .search {
+      display: none !important;
+    }
+  }
+
+  .top-bar {
+    justify-content: space-between;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /*  */
 }
 
 @layer components {}
