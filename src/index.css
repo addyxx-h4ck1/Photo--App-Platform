@@ -248,6 +248,11 @@
       min-width: 0;
     }
 
+    .create-post form {
+      width: 100%;
+
+    }
+
     .content-container h1 {
       font-size: 15px;
     }

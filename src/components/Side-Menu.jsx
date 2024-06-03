@@ -46,7 +46,7 @@ const SideMenu = () => {
           <i className="fas fa-search"></i> Search Artists
         </NavLink>
         <NavLink
-          to={'explore'}
+          to={'/'}
           className={({ isActive }) =>
             isActive ? 'active navlink' : 'navlink'
           }
