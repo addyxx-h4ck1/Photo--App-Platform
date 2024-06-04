@@ -9,6 +9,8 @@ import AllPosts from './components/Posts.jsx'
 import CreatePost from './pages/shared/Create-Post.jsx'
 import TrendingPosts from './pages/shared/Trending-Posts.jsx'
 import Pixelrart from './pages/shared/Pixelrart.jsx'
+import PixelrartTopNav from './components/Pixelrart-Top-Nav.jsx'
+import Profile from './pages/shared/Profile.jsx'
 
 const router = createBrowserRouter([
   {
@@ -22,24 +24,34 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '/pixelrart',
-    element: <PixelrArtMainPage />,
+    path: '/m',
+    element: <PixelrartTopNav />,
     children: [
       {
-        path: '/pixelrart',
-        element: <Pixelrart />,
+        path: '/m/pixelrart',
+        element: <PixelrArtMainPage />,
+        children: [
+          {
+            path: '/m/pixelrart',
+            element: <Pixelrart />,
+          },
+          {
+            path: '/m/pixelrart/foryou',
+            element: <AllPosts />,
+          },
+          {
+            path: '/m/pixelrart/create',
+            element: <CreatePost />,
+          },
+          {
+            path: '/m/pixelrart/trending',
+            element: <TrendingPosts />,
+          },
+        ],
       },
       {
-        path: '/pixelrart/foryou',
-        element: <AllPosts />,
-      },
-      {
-        path: '/pixelrart/create',
-        element: <CreatePost />,
-      },
-      {
-        path: '/pixelrart/trending',
-        element: <TrendingPosts />,
+        path: '/m/profile',
+        element: <Profile />,
       },
     ],
   },

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 const Pixelrart = () => {
   const navigate = useNavigate()
   useEffect(() => {
-    navigate('/pixelrart/foryou')
+    navigate('/m/pixelrart/foryou')
   }, [])
   return
 }

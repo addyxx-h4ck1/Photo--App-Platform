@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import 'react-lazy-load-image-component/src/effects/blur.css'
 
 const Post = ({ ...el }) => {
   const [loaded, setLoaded] = useState(false)
@@ -15,14 +16,9 @@ const Post = ({ ...el }) => {
       <div className="post-card w-full bg-[#312f2f2e] rounded-lg p-3">
         <div className="post-profile flex items-center gap-3 border-b-[0.1px] border-[#80808047] pb-2">
           {loaded ? (
-            // <img
-            //   src={el.img}
-            //   alt=""
-            //   className="aspect-[1/1] object-cover w-[60px] bg-[#323232] h-[60px] rounded-full"
-            // />
             <LazyLoadImage
               alt={'Genz PhotoSop'}
-              src={el.img} // use normal <img> attributes as props
+              src={el.img}
               width={'60px'}
               height={'60px'}
               className="aspect-[1/1] object-cover w-[60px] bg-[#323232] h-[60px] rounded-full"
@@ -52,15 +48,10 @@ const Post = ({ ...el }) => {
         {/* POST IMAGE */}
         <div className="w-full">
           {loaded ? (
-            // <img
-            //   src={el.img}
-            //   loading="lazy"
-            //   alt={'Genz PhotoSop'}
-            //   className="post-image w-full block object-cover bg-[#39383841] rounded-lg"
-            // />
             <LazyLoadImage
+              effect="blur"
               alt={'Genz PhotoSop'}
-              src={el.img} // use normal <img> attributes as props
+              src={el.img}
               width={'100%'}
               className="post-image w-full block object-cover bg-[#39383841] rounded-lg"
             />
