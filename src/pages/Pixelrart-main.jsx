@@ -4,7 +4,6 @@ import SponsoredMenu from '../components/Sponsored-Menu'
 import { Outlet } from 'react-router-dom'
 
 const PixelrArtMainPage = (props) => {
-  console.log(props)
   return (
     <>
       <main className="content-container relative flex justify-between gap-[.5rem] ">

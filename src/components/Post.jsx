@@ -3,9 +3,11 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
+import { useNavigate } from 'react-router-dom'
 
 const Post = ({ ...el }) => {
   const [loaded, setLoaded] = useState(false)
+  const navigate = useNavigate()
   useEffect(() => {
     const img = new Image()
     img.src = el.img
@@ -54,6 +56,12 @@ const Post = ({ ...el }) => {
               src={el.img}
               width={'100%'}
               className="post-image w-full block object-cover bg-[#39383841] rounded-lg"
+              onClick={(e) =>
+                navigate('/m/pixelrart/posts/uiweywioeuyrue', {
+                  state: e.target.src,
+                  preventScrollReset: true,
+                })
+              }
             />
           ) : (
             <Skeleton height={100} />
