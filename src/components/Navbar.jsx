@@ -1,6 +1,8 @@
 import React from 'react'
 import Sidebar from './Sidebar'
 import icon from '../assets/Photography-Logos-removebg-preview.png'
+import { Link } from 'react-router-dom'
+
 const Navbar = (props) => {
   const { sidebarActions } = props
 
@@ -18,9 +20,13 @@ const Navbar = (props) => {
         <p>Collection</p>
         <p>Market place</p>
         <p>Community</p>
-        <button className="top-btn duration-500 hover:duration-500 hover:border-[#22c1c3] py-3 px-4 hover:bg-[#22c1c3] border-2 rounded-3xl hover:text-primary font-semibold">
+        <Link
+          preventScrollReset={true}
+          to={'/auth/signup'}
+          className="top-btn duration-500 hover:duration-500 hover:border-[#22c1c3] py-3 px-4 hover:bg-[#22c1c3] border-2 rounded-3xl hover:text-primary font-semibold"
+        >
           Get Started
-        </button>
+        </Link>
       </div>
       <button className="menu-btn text-xl" onClick={sidebarActions}>
         <i className="fa fa-bars"></i>

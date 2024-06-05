@@ -11,6 +11,7 @@ const SideMenuMobile = (func) => {
       <div className="side-menu-links flex flex-col justify-center gap-y-3 text-nowrap">
         <NavLink
           onClick={disableSideBar}
+          preventScrollReset={true}
           to={'/m/pixelrart/foryou'}
           className={({ isActive }) =>
             isActive ? 'active navlink' : 'navlink'
@@ -19,6 +20,7 @@ const SideMenuMobile = (func) => {
           <i className="fa fa-home"></i> For You
         </NavLink>
         <NavLink
+          preventScrollReset={true}
           onClick={disableSideBar}
           to={'/m/pixelrart/create'}
           className={({ isActive }) =>
@@ -28,6 +30,7 @@ const SideMenuMobile = (func) => {
           <i className="fa fa-plus"></i> Create Post
         </NavLink>
         <NavLink
+          preventScrollReset={true}
           onClick={disableSideBar}
           to={'/m/pixelrart/trending'}
           className={({ isActive }) =>
@@ -38,24 +41,18 @@ const SideMenuMobile = (func) => {
         </NavLink>
         <NavLink
           onClick={disableSideBar}
-          to={'/top-artists'}
+          to={'/m/pixelrart/artists'}
+          preventScrollReset={true}
           className={({ isActive }) =>
             isActive ? 'active navlink' : 'navlink'
           }
         >
           <i className="fas fa-user-friends"></i> Top Artists
         </NavLink>
+
         <NavLink
           onClick={disableSideBar}
-          to={'/query-artists'}
-          className={({ isActive }) =>
-            isActive ? 'active navlink' : 'navlink'
-          }
-        >
-          <i className="fas fa-search"></i> Search Artists
-        </NavLink>
-        <NavLink
-          onClick={disableSideBar}
+          preventScrollReset={true}
           to={'/'}
           className={({ isActive }) =>
             isActive ? 'active navlink' : 'navlink'
@@ -63,7 +60,11 @@ const SideMenuMobile = (func) => {
         >
           <i className="fa-solid fa-compass"></i> Explore
         </NavLink>
-        <NavLink to={'/m/profile'} className="navlink">
+        <NavLink
+          to={'/m/profile'}
+          preventScrollReset={true}
+          className="navlink"
+        >
           <div className="flex gap-2">
             <img
               src="https://www.royalreelphotography.co.ke/wp-content/uploads/2021/02/Royal-Reel-Photography-Portrait-Photography-in-Kenya-8.jpg"

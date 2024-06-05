@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
@@ -59,7 +60,9 @@ const Footer = () => {
           <div className="links flex flex-col gap-2">
             <a href="">About Us</a>
             <a href="">Support</a>
-            <a href="">Get Started</a>
+            <Link preventScrollReset={true} to={'/auth/signup'}>
+              Get Started
+            </Link>
           </div>
         </div>
       </div>

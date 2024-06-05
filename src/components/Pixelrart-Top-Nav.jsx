@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import logo from '../assets/Photography-Logos-removebg-preview.png'
 import SideMenuMobile from '../components/Side-menu-Mobile'
 import ProfileMenu from '../components/Profile-Menu'
-import { Link, NavLink, Outlet } from 'react-router-dom'
+import { Link, NavLink, Outlet, ScrollRestoration } from 'react-router-dom'
 
 const PixelrartTopNav = (props) => {
   const [showsideBar, setShowSideBar] = useState(false)
@@ -58,6 +58,11 @@ const PixelrartTopNav = (props) => {
         {/* SIDEBAR */}
       </section>
       <Outlet props={setShowProfileMenu} />
+      <ScrollRestoration
+        getKey={(location, matches) => {
+          return location.pathname
+        }}
+      />
     </>
   )
 }

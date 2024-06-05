@@ -1,6 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import {
+  createBrowserRouter,
+  RouterProvider,
+  ScrollRestoration,
+} from 'react-router-dom'
 import App from './App.jsx'
 import './index.css'
 import Home from './pages/Home.jsx'
@@ -12,6 +16,10 @@ import Pixelrart from './pages/shared/Pixelrart.jsx'
 import PixelrartTopNav from './components/Pixelrart-Top-Nav.jsx'
 import Profile from './pages/shared/Profile.jsx'
 import SinglePost from './pages/shared/Post-Detail.jsx'
+import TopListArtists from './pages/shared/Top-List-Artists.jsx'
+import SignUp from './pages/Sign-up.jsx'
+import SignIn from './pages/Sign-in.jsx'
+import ForgotPassword from './pages/Forgot-password.jsx'
 
 const router = createBrowserRouter([
   {
@@ -23,6 +31,18 @@ const router = createBrowserRouter([
         element: <Home />,
       },
     ],
+  },
+  {
+    path: '/auth/signup',
+    element: <SignUp />,
+  },
+  {
+    path: '/auth/signin',
+    element: <SignIn />,
+  },
+  {
+    path: '/auth/password-reset',
+    element: <ForgotPassword />,
   },
   {
     path: '/m',
@@ -49,6 +69,10 @@ const router = createBrowserRouter([
             element: <TrendingPosts />,
           },
           {
+            path: '/m/pixelrart/artists',
+            element: <TopListArtists />,
+          },
+          {
             path: '/m/pixelrart/posts/:ID',
             element: <SinglePost />,
           },
@@ -63,5 +87,5 @@ const router = createBrowserRouter([
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router} />
+  <RouterProvider router={router}></RouterProvider>
 )

@@ -1,7 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const ProfileMenu = (func) => {
+  const navigate = useNavigate()
   const { props } = func
   const disableProfile = () => {
     props(false)
@@ -23,7 +24,8 @@ const ProfileMenu = (func) => {
       </div>
       <Link
         to={'/m/profile'}
-        className="p-2 text-sm w-full border-[#199898] border-[0.01px]  duration-300 hover:duration-300 hover:bg-[#199898] mb-3"
+        preventScrollReset={true}
+        className="p-2 text-sm text-center w-full border-[#199898] border-[0.01px]  duration-300 hover:duration-300 hover:bg-[#199898] mb-3"
         onClick={disableProfile}
       >
         View profile
@@ -48,12 +50,12 @@ const ProfileMenu = (func) => {
           <i className="fa fa-gear"></i> Sign out
         </Link>
       </div>
-      <Link
-        className="text-center py-4 border-y-[1px] w-full text-sm border-[#80808033]"
-        onClick={disableProfile}
+      <button
+        className="text-center hover:text-[royalblue] hover:duration-300 duration-300 py-4 border-y-[1px] w-full text-sm border-[#80808033]"
+        onClick={() => navigate('/auth/signin', { replace: true })}
       >
         <i className="fa fa-power-off"></i> Sign out
-      </Link>
+      </button>
     </div>
   )
 }

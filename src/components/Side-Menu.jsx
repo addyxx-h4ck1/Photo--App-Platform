@@ -6,6 +6,7 @@ const SideMenu = () => {
     <section className="side-menu sticky top-[60px] overflow-x-hidden scroll-m-1 duration-500 hover:duration-500 p-3 right-0 w-[20%] min-w-[200px] h-[90vh] bg-[#312f2f6c]">
       <div className="side-menu-links flex flex-col gap-y-3 text-nowrap">
         <NavLink
+          preventScrollReset={true}
           to={'/m/pixelrart/foryou'}
           className={({ isActive }) =>
             isActive ? 'active navlink' : 'navlink'
@@ -14,6 +15,7 @@ const SideMenu = () => {
           <i className="fa fa-home"></i> For You
         </NavLink>
         <NavLink
+          preventScrollReset={true}
           to={'/m/pixelrart/create'}
           className={({ isActive }) =>
             isActive ? 'active navlink' : 'navlink'
@@ -22,6 +24,7 @@ const SideMenu = () => {
           <i className="fa fa-plus"></i> Create Post
         </NavLink>
         <NavLink
+          preventScrollReset={true}
           to={'/m/pixelrart/trending'}
           className={({ isActive }) =>
             isActive ? 'active navlink' : 'navlink'
@@ -30,22 +33,17 @@ const SideMenu = () => {
           <i className="fa-solid fa-arrow-trend-up"></i> Trending
         </NavLink>
         <NavLink
-          to={'/top-artists'}
+          to={'/m/pixelrart/artists'}
+          preventScrollReset={true}
           className={({ isActive }) =>
             isActive ? 'active navlink' : 'navlink'
           }
         >
           <i className="fas fa-user-friends"></i> Top Artists
         </NavLink>
+
         <NavLink
-          to={'/query-artists'}
-          className={({ isActive }) =>
-            isActive ? 'active navlink' : 'navlink'
-          }
-        >
-          <i className="fas fa-search"></i> Search Artists
-        </NavLink>
-        <NavLink
+          preventScrollReset={true}
           to={'/'}
           className={({ isActive }) =>
             isActive ? 'active navlink' : 'navlink'
@@ -53,7 +51,11 @@ const SideMenu = () => {
         >
           <i className="fa-solid fa-compass"></i> Explore
         </NavLink>
-        <NavLink to={'/m/profile'} className="navlink">
+        <NavLink
+          to={'/m/profile'}
+          preventScrollReset={true}
+          className="navlink"
+        >
           <div className="flex gap-2 items-center">
             <img
               src="https://www.royalreelphotography.co.ke/wp-content/uploads/2021/02/Royal-Reel-Photography-Portrait-Photography-in-Kenya-8.jpg"
