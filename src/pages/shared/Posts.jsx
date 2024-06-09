@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { data } from '../assets/dummy'
-import Post from './Post'
+import { data } from '../../assets/dummy'
+import Post from '../../components/Post'
+import { useSelector } from 'react-redux'
 
 const AllPosts = () => {
   return (

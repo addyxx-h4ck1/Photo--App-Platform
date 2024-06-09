@@ -1,15 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {
-  createBrowserRouter,
-  RouterProvider,
-  ScrollRestoration,
-} from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import store, { Persistor } from './store/store.js'
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 import App from './App.jsx'
 import './index.css'
 import Home from './pages/Home.jsx'
 import PixelrArtMainPage from './pages/Pixelrart-main.jsx'
-import AllPosts from './components/Posts.jsx'
+import AllPosts from './pages/shared/Posts.jsx'
 import CreatePost from './pages/shared/Create-Post.jsx'
 import TrendingPosts from './pages/shared/Trending-Posts.jsx'
 import Pixelrart from './pages/shared/Pixelrart.jsx'
@@ -20,6 +19,7 @@ import TopListArtists from './pages/shared/Top-List-Artists.jsx'
 import SignUp from './pages/Sign-up.jsx'
 import SignIn from './pages/Sign-in.jsx'
 import ForgotPassword from './pages/Forgot-password.jsx'
+import PasswordEmailMessage from './pages/Password-reset-inst.jsx'
 
 const router = createBrowserRouter([
   {
@@ -39,6 +39,10 @@ const router = createBrowserRouter([
   {
     path: '/auth/signin',
     element: <SignIn />,
+  },
+  {
+    path: '/auth/reset-instructions',
+    element: <PasswordEmailMessage />,
   },
   {
     path: '/auth/password-reset',
@@ -87,5 +91,9 @@ const router = createBrowserRouter([
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router}></RouterProvider>
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={Persistor}>
+      <RouterProvider router={router} />
+    </PersistGate>
+  </Provider>
 )

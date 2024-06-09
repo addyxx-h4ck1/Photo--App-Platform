@@ -1,9 +1,16 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { deleteToken } from '../features/Login/user-login-slice'
+import { useDispatch } from 'react-redux'
 
 const ProfileMenu = (func) => {
-  const navigate = useNavigate()
   const { props } = func
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  //logout func
+  const logout = () => {
+    dispatch(deleteToken())
+  }
   const disableProfile = () => {
     props(false)
   }
@@ -52,7 +59,9 @@ const ProfileMenu = (func) => {
       </div>
       <button
         className="text-center hover:text-[royalblue] hover:duration-300 duration-300 py-4 border-y-[1px] w-full text-sm border-[#80808033]"
-        onClick={() => navigate('/auth/signin', { replace: true })}
+        onClick={() => {
+          logout()
+        }}
       >
         <i className="fa fa-power-off"></i> Sign out
       </button>

@@ -367,6 +367,32 @@
   }
 
   /* Profile */
+
+  /* Alerts */
+  @media screen and (max-width:650px) {
+
+    .box-alert {
+      right: 0;
+      left: 0;
+      justify-content: center;
+    }
+
+    .box-alert-wrapper {
+      width: 95%;
+    }
+  }
+
+  /* Alerts */
+  /* pwd reset */
+  @media screen and (max-width: 950px) {
+    .pwd-reset-box {
+      width: 98%;
+      font-size: 15px;
+    }
+  }
+
+  /* pwd reset */
+
 }
 
 @layer utilities {
