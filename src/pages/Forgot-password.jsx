@@ -3,9 +3,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import AlertSuccess from '../components/Alert-success'
 import AlertWarning from '../components/Alert-warning'
+import Loader from '../components/Loader'
+import { disableLoading, enableLoading } from '../features/loading-slice'
+import { useDispatch, useSelector } from 'react-redux'
 
 const ForgotPassword = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { loading } = useSelector((state) => state.loading)
   const [warningMessage, setWarningMessage] = useState('')
   const [showWarning, setShowWarning] = useState(false)
   const [successMessage, setSuccessMessage] = useState('')
@@ -42,10 +47,12 @@ const ForgotPassword = () => {
     let formData = Object.fromEntries(form.entries())
     //send data server
     try {
+      dispatch(enableLoading())
       let serverEndpoint =
         'https://auth-copiq6djm4es73a4js7g.onrender.com/auth/sendmail'
       const response = await axios.post(serverEndpoint, formData)
       if (response.status === 201) {
+        dispatch(disableLoading())
         popSuccess(response.data)
         //clear form and redirect to login
         emailRef.current.value = ''
@@ -54,6 +61,7 @@ const ForgotPassword = () => {
         }, 2000)
       }
     } catch (error) {
+      dispatch(disableLoading())
       showError('oops! internal server error, please try again!')
     }
   }
@@ -78,19 +86,24 @@ const ForgotPassword = () => {
                 type="email"
                 id="reset-account-email"
                 name="email"
+                autoComplete={'off'}
                 ref={emailRef}
                 placeholder="Enter email"
                 className="w-full rounded-md py-4 px-5 border-0 outline-0"
               />
             </div>
 
-            <div className="flex flex-col w-full gap-1 mb-3 mt-2 text-white font-semibold">
-              <input
-                type="submit"
-                value={'Reset Password'}
-                className="w-full rounded-md py-4 px-5 border-0 outline-0 bg-[royalblue] duration-300 hover:duration-300 hover:bg-[#6589f6]"
-              />
-            </div>
+            {loading ? (
+              <Loader />
+            ) : (
+              <div className="flex flex-col w-full gap-1 mb-3 mt-2 text-white font-semibold">
+                <input
+                  type="submit"
+                  value={'Reset Password'}
+                  className="w-full rounded-md py-4 px-5 border-0 outline-0 bg-[royalblue] duration-300 hover:duration-300 hover:bg-[#6589f6]"
+                />
+              </div>
+            )}
           </form>
           <div className="flex flex-col text-center justify-center items-center w-full gap-1 mb-3 mt-2">
             <div className="flex gap-1  flex-wrap text-center justify-center items-center ">

@@ -6,6 +6,8 @@ import AlertWarning from '../components/Alert-warning'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { saveToken } from '../features/Login/user-login-slice'
+import Loader from '../components/Loader'
+import { disableLoading, enableLoading } from '../features/loading-slice'
 
 const SignIn = () => {
   const dispatch = useDispatch()
@@ -14,6 +16,7 @@ const SignIn = () => {
   const [showWarning, setShowWarning] = useState(false)
   const [successMessage, setSuccessMessage] = useState('')
   const [showSuccess, setShowSuccess] = useState(false)
+  const { loading } = useSelector((state) => state.loading)
   //show warning
   const showError = (message) => {
     setWarningMessage(message)
@@ -47,10 +50,12 @@ const SignIn = () => {
     const formData = Object.fromEntries(form.entries())
     //send form to server (Axios)
     try {
+      dispatch(enableLoading())
       let serverEndpoint =
         'https://auth-copiq6djm4es73a4js7g.onrender.com/api/signin'
       const response = await axios.post(serverEndpoint, formData)
       if (response.status === 200) {
+        dispatch(disableLoading())
         popSuccess('Welcome back!')
         //clear form and redirect to login
         IDRef.current.value = ''
@@ -68,6 +73,7 @@ const SignIn = () => {
       //incase of an error
     } catch (error) {
       console.log(error)
+      dispatch(disableLoading())
       if (error.response.status == 401) return showError(error.response.data)
       if (error.response.data.includes('oops!'))
         return showError(error.response.data)
@@ -78,7 +84,7 @@ const SignIn = () => {
     <>
       <section className="sign-up-container w-full flex justify-center items-center h-[95vh] px-2 text-sm">
         <article className="sign-up-wrapper flex flex-col items-center p-4 bg-bgPrimary w-[480px]  rounded-2xl">
-          <h1 className="font-black text-2xl text-center">Welcome Back!</h1>
+          <h1 className="font-black text-2xl text-center">Login</h1>
           <div className="flex gap-1  flex-wrap text-center justify-center items-center my-2">
             <p>Don't have an account?</p>
             <Link to={'/auth/signup'} className="text-[royalblue]">
@@ -96,6 +102,7 @@ const SignIn = () => {
                 id="signin-email"
                 name="uniqueID"
                 ref={IDRef}
+                autoComplete={'off'}
                 placeholder="Enter email or username"
                 className="w-full rounded-md py-4 px-5 border-0 outline-0"
               />
@@ -110,16 +117,17 @@ const SignIn = () => {
                 className="w-full rounded-md py-4 px-5 border-0 outline-0"
               />
             </div>
-            <div className="flex flex-col w-full gap-1 mb-3 mt-2 text-white font-semibold">
-              <input
-                type="submit"
-                value={'Sign me in'}
-                id="signin-conf-password"
-                name="signin-conf-password"
-                placeholder="Create conf-password"
-                className="w-full rounded-md py-4 px-5 border-0 outline-0 bg-[royalblue] duration-300 hover:duration-300 hover:bg-[#6589f6]"
-              />
-            </div>
+            {loading ? (
+              <Loader />
+            ) : (
+              <div className="flex flex-col w-full gap-1 mb-3 mt-2 text-white font-semibold">
+                <input
+                  type="submit"
+                  value={'Sign me in'}
+                  className="w-full rounded-md py-4 px-5 border-0 outline-0 bg-[royalblue] duration-300 hover:duration-300 hover:bg-[#6589f6]"
+                />
+              </div>
+            )}
           </form>
           <div className="flex flex-col text-center justify-center items-center w-full gap-1 mb-3 mt-1 ">
             <Link to={'/auth/password-reset'} className="text-[royalblue]">

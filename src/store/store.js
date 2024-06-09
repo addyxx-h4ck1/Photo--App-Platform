@@ -1,8 +1,4 @@
-import {
-  applyMiddleware,
-  combineReducers,
-  configureStore,
-} from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import loginTokenSlice from '../features/Login/user-login-slice'
 import {
   persistReducer,
@@ -17,9 +13,11 @@ import {
 import storage from 'redux-persist/lib/storage'
 import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2'
 import sessionStorage from 'redux-persist/es/storage/session'
+import loadingSlice from '../features/loading-slice'
 
 const rootReducer = combineReducers({
   token: loginTokenSlice,
+  loading: loadingSlice,
 })
 
 const persistConfig = {

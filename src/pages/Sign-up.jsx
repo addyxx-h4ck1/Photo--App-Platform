@@ -4,13 +4,18 @@ import { validatePassword } from '../utils/validate-password'
 import AlertSuccess from '../components/Alert-success'
 import AlertWarning from '../components/Alert-warning'
 import axios from 'axios'
+import Loader from '../components/Loader'
+import { disableLoading, enableLoading } from '../features/loading-slice'
+import { useDispatch, useSelector } from 'react-redux'
 
 const SignUp = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [warningMessage, setWarningMessage] = useState('')
   const [showWarning, setShowWarning] = useState(false)
   const [successMessage, setSuccessMessage] = useState('')
   const [showSuccess, setShowSuccess] = useState(false)
+  const { loading } = useSelector((state) => state.loading)
   //show warning
   const showError = (message) => {
     setWarningMessage(message)
@@ -56,10 +61,12 @@ const SignUp = () => {
     const formData = Object.fromEntries(form.entries())
     //send form to server (Axios)
     try {
+      dispatch(enableLoading())
       let serverEndpoint =
         'https://auth-copiq6djm4es73a4js7g.onrender.com/api/signup'
       const response = await axios.post(serverEndpoint, formData)
       if (response.status === 201) {
+        dispatch(disableLoading())
         popSuccess(response.data)
         //clear form and redirect to login
         emailRef.current.value = ''
@@ -74,6 +81,7 @@ const SignUp = () => {
       }
       //incase of an error
     } catch (error) {
+      dispatch(disableLoading())
       if (error.response.status == 409) return showError(error.response.data)
       showError('Internal server error, try again!')
     }
@@ -130,21 +138,23 @@ const SignUp = () => {
                 type="text"
                 id="signup-conf-password"
                 name="signup-conf-password"
+                autoComplete={'off'}
                 ref={confirmPasswordRef}
                 placeholder="Confirm password"
                 className="w-full rounded-md py-4 px-5 border-0 outline-0"
               />
             </div>
-            <div className="flex flex-col w-full gap-1 mb-3 mt-2 text-white font-semibold">
-              <input
-                type="submit"
-                value={'Sign me up'}
-                // id="signup-conf-password"
-                // name="signup-conf-password"
-                // placeholder="Create conf-password"
-                className="w-full rounded-md py-4 px-5 border-0 outline-0 bg-[royalblue] duration-300 hover:duration-300 hover:bg-[#6589f6]"
-              />
-            </div>
+            {loading ? (
+              <Loader />
+            ) : (
+              <div className="flex flex-col w-full gap-1 mb-3 mt-2 text-white font-semibold">
+                <input
+                  type="submit"
+                  value={'Sign me up'}
+                  className="w-full rounded-md py-4 px-5 border-0 outline-0 bg-[royalblue] duration-300 hover:duration-300 hover:bg-[#6589f6]"
+                />
+              </div>
+            )}
           </form>
           <div className="flex flex-col text-center justify-center items-center w-full gap-1 mb-3 mt-2">
             <p className="mb-2 text-xs">
