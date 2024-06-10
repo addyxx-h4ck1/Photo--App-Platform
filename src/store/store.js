@@ -14,16 +14,16 @@ import storage from 'redux-persist/lib/storage'
 import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2'
 import sessionStorage from 'redux-persist/es/storage/session'
 import loadingSlice from '../features/loading-slice'
+import hardSet from 'redux-persist/es/stateReconciler/hardSet'
 
 const rootReducer = combineReducers({
   token: loginTokenSlice,
   loading: loadingSlice,
 })
-
 const persistConfig = {
   key: 'main-root',
+  whitelist: ['token'],
   storage: sessionStorage,
-  stateReconciler: autoMergeLevel2,
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
