@@ -1,7 +1,9 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 const SideMenuMobile = (func) => {
+  const { userInfo } = useSelector((state) => state.token)
   const { props } = func
   const disableSideBar = () => {
     props(false)
@@ -65,12 +67,16 @@ const SideMenuMobile = (func) => {
           preventScrollReset={true}
           className="navlink"
         >
-          <div className="flex gap-2">
-            <img
-              src="https://www.royalreelphotography.co.ke/wp-content/uploads/2021/02/Royal-Reel-Photography-Portrait-Photography-in-Kenya-8.jpg"
-              alt=""
-              className="w-[30px] h-[30px] rounded-full object-cover overflow-hidden"
-            />
+          <div className="flex gap-2 items-center">
+            {userInfo ? (
+              <img
+                src={userInfo.pImg}
+                alt=""
+                className="w-[30px] h-[30px] rounded-full object-cover overflow-hidden"
+              />
+            ) : (
+              <div className="fa fa-camera w-[30px] h-[30px] flex justify-center items-center   rounded-full object-cover overflow-hidden"></div>
+            )}
             <p>Profile</p>
           </div>
         </NavLink>

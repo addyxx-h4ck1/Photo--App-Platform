@@ -20,6 +20,7 @@ import SignUp from './pages/Sign-up.jsx'
 import SignIn from './pages/Sign-in.jsx'
 import ForgotPassword from './pages/Forgot-password.jsx'
 import PasswordEmailMessage from './pages/Password-reset-inst.jsx'
+import UserProfile from './pages/shared/User-profile.jsx'
 
 const router = createBrowserRouter([
   {
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
       {
         path: '/m/profile',
         element: <Profile />,
+      },
+      {
+        path: '/m/profile/:user_Id',
+        element: <UserProfile />,
       },
     ],
   },

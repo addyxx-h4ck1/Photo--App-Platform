@@ -7,58 +7,59 @@ import Services from './profile-components/Services'
 import Photos from './profile-components/Photos'
 import { Navigate, useParams } from 'react-router-dom'
 import LoadingData from '../../components/Data-loading'
-
-const Profile = () => {
-  const { fetchLoading } = useSelector((state) => state.token)
-  const { T } = useSelector((state) => state.token)
-  const { userInfo } = useSelector((state) => state.token)
+import { fetchUserById } from '../../utils/fetch-user'
+import Error404 from '../../components/Error404'
+const UserProfile = () => {
+  const [loading, setIsLoading] = useState(false)
+  const [user, setUser] = useState(null)
+  const { user_Id } = useParams()
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        setIsLoading(true)
+        const user = await fetchUserById(user_Id)
+        setUser(user.data)
+        setIsLoading(false)
+        console.log(user.data)
+      } catch (error) {
+        setIsLoading(false)
+        console.error(error)
+      }
+    }
+    fetchUser()
+  }, [fetchUserById])
   //desturcture and distribute user info
-  const {
-    userName,
-    brandName,
-    bio,
-    cImg,
-    joined,
-    loc,
-    pImg,
-    photos,
-    sFb,
-    sIg,
-    sWhtpp,
-    services,
-    website,
-  } = userInfo
+
   return (
     <>
-      {fetchLoading ? (
+      {loading ? (
         <LoadingData />
       ) : (
         <>
-          {T ? (
+          {user ? (
             <main className="profile-container flex justify-between mx-3 gap-3 relative">
               <section className="profile-media-container  w-[50%] flex-grow">
                 <Header
-                  userName={userName}
-                  brandName={brandName}
-                  bio={bio}
-                  joined={joined}
-                  cImg={cImg}
-                  loc={loc}
-                  pImg={pImg}
-                  sFb={sFb}
-                  sWhtpp={sWhtpp}
-                  sIg={sIg}
+                  userName={user.userName}
+                  brandName={user.brandName}
+                  bio={user.bio}
+                  cImg={user.cImg}
+                  loc={user.loc}
+                  pImg={user.pImg}
+                  sFb={user.sFb}
+                  sWhtpp={user.sWhtpp}
+                  sIg={user.sIg}
                 />
                 <About />
-                <Services services={services} />
+                <Services services={user.services} />
               </section>
               <section className="profile-media-container profile-cont-photos sticky top-[60px]  bg-bgPrimary w-[40%] flex-grow p-2 h-[90vh] overflow-hidden overflow-y-auto">
                 <h1 className="font-bold text-lg my-2">Photos</h1>
-                <Photos photos={photos} />
+                <Photos photos={user.photos} />
               </section>
             </main>
           ) : (
-            <Navigate to={'/auth/signin'} />
+            <Error404 />
           )}
         </>
       )}
@@ -66,4 +67,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default UserProfile

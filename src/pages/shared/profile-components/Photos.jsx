@@ -34,7 +34,7 @@ const Photos = (props) => {
                     <LazyLoadImage
                       src={photo}
                       key={photo}
-                      className="templ rounded-lg min-w-[200px] h-[150px] object-cover flex-grow"
+                      className="fa flex justify-center items-center text-center fa-camera text-2xl templ rounded-lg min-w-[200px] h-[150px]  object-cover flex-grow"
                       onClick={(e) => {
                         setFullImage(e.target.src)
                       }}

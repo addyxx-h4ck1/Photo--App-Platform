@@ -43,7 +43,6 @@ const loginTokenSlice = createSlice({
       .addCase(fetchUser.fulfilled, (state, action) => {
         state.fetchLoading = false
         state.userInfo = action.payload
-        console.log(action.payload)
       })
       .addCase(fetchUser.rejected, (state, action) => {
         console.log(action.error)

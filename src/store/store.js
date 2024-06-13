@@ -15,9 +15,11 @@ import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2'
 import sessionStorage from 'redux-persist/es/storage/session'
 import loadingSlice from '../features/loading-slice'
 import hardSet from 'redux-persist/es/stateReconciler/hardSet'
+import fetchAllUsersSlice from '../features/users-slice'
 
 const rootReducer = combineReducers({
   token: loginTokenSlice,
+  users: fetchAllUsersSlice,
   loading: loadingSlice,
 })
 const persistConfig = {

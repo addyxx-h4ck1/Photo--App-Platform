@@ -22,8 +22,6 @@ const Header = ({
   sWhtpp,
 }) => {
   const [loaded, setLoaded] = useState(false)
-  const formatDate = format(joined, 'MM\tdd\tyyyy')
-  const date = formatRFC7231(formatDate).split(' ').slice(1, 4).join(' ')
 
   return (
     <article className="profile-top w-full relative bg-bgPrimary pb-2">
@@ -73,9 +71,6 @@ const Header = ({
                 <i className="fa fa-location-dot"></i> {loc}
               </>
             )}
-          </p>
-          <p>
-            <i className="fa fa-calendar"></i> Joined {date}
           </p>
         </div>
         <div className="profile-links-date-loc flex gap-4 mt-3 border-b-2 border-[#63626255] pb-5 w-full text-nowrap flex-wrap">

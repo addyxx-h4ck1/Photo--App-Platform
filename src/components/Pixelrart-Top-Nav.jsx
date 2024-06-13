@@ -3,8 +3,10 @@ import logo from '../assets/Photography-Logos-removebg-preview.png'
 import SideMenuMobile from '../components/Side-menu-Mobile'
 import ProfileMenu from '../components/Profile-Menu'
 import { Link, NavLink, Outlet, ScrollRestoration } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const PixelrartTopNav = (props) => {
+  const { userInfo } = useSelector((state) => state.token)
   const [showsideBar, setShowSideBar] = useState(false)
   const [showProfileMenu, setShowProfileMenu] = useState(false)
   return (
@@ -40,20 +42,29 @@ const PixelrartTopNav = (props) => {
             <i className={`fa ${showsideBar ? 'fa-times' : 'fa-bars'}`}></i>
           </button>
           <div
-            className=""
             onClick={() => {
               setShowProfileMenu(!showProfileMenu)
             }}
           >
-            <img
-              src="https://www.royalreelphotography.co.ke/wp-content/uploads/2021/02/Royal-Reel-Photography-Portrait-Photography-in-Kenya-8.jpg"
-              alt=""
-              className="w-[40px] h-[40px] rounded-lg object-cover overflow-hidden"
-            />
+            {userInfo ? (
+              <img
+                src={userInfo.pImg}
+                alt=""
+                className="w-[40px] h-[40px] rounded-lg object-cover overflow-hidden"
+              />
+            ) : (
+              <div className="fa fa-user flex justify-center items-center w-[40px] h-[40px] text-xl bg-bgPrimary p-2 px-4 rounded-lg"></div>
+            )}
           </div>
         </div>
         {/* SIDEBAR */}
-        {showProfileMenu ? <ProfileMenu props={setShowProfileMenu} /> : null}
+        {showProfileMenu ? (
+          <>
+            {userInfo ? (
+              <ProfileMenu props={setShowProfileMenu} {...userInfo} />
+            ) : null}
+          </>
+        ) : null}
         {showsideBar ? <SideMenuMobile props={setShowSideBar} /> : null}
         {/* SIDEBAR */}
       </section>
