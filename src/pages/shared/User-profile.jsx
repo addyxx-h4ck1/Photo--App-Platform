@@ -20,7 +20,6 @@ const UserProfile = () => {
         const user = await fetchUserById(user_Id)
         setUser(user.data)
         setIsLoading(false)
-        console.log(user.data)
       } catch (error) {
         setIsLoading(false)
         console.error(error)

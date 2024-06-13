@@ -7,8 +7,9 @@ const ProfileMenu = ({ ...userInfo }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   //logout func
-  const logout = () => {
+  const logout = async () => {
     dispatch(deleteToken())
+    window.location.replace('/auth/signin')
   }
   const disableProfile = () => {
     props(false)

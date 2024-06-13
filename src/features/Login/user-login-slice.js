@@ -17,6 +17,7 @@ export const fetchUser = createAsyncThunk('/u/o', async ({ token }) => {
         Authorization: `Bearer ${token}`,
       },
     })
+
     return req.data
   } catch (error) {
     return error
@@ -45,7 +46,6 @@ const loginTokenSlice = createSlice({
         state.userInfo = action.payload
       })
       .addCase(fetchUser.rejected, (state, action) => {
-        console.log(action.error)
         ;(state.fetchLoading = false), (state.error = action.error)
       })
   },
