@@ -97,11 +97,7 @@ const router = createBrowserRouter([
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <GoogleOAuthProvider
-    clientId={
-      '221514232024-clun599k6q4kt7n6si1so2tnvif9ic34.apps.googleusercontent.com'
-    }
-  >
+  <GoogleOAuthProvider clientId={import.meta.env.VITE_APP_GOOGLE_ID}>
     <Provider store={store}>
       <PersistGate loading={null} persistor={Persistor}>
         <RouterProvider router={router} />
