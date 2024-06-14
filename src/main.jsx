@@ -5,6 +5,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google'
 import store, { Persistor } from './store/store.js'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
+const googleApiKey = import.meta.env.VITE_APP_GOOGLE_ID
 import './index.css'
 import App from './App.jsx'
 import Home from './pages/Home.jsx'
@@ -97,7 +98,7 @@ const router = createBrowserRouter([
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <GoogleOAuthProvider clientId={import.meta.env.VITE_APP_GOOGLE_ID}>
+  <GoogleOAuthProvider clientId={googleApiKey}>
     <Provider store={store}>
       <PersistGate loading={null} persistor={Persistor}>
         <RouterProvider router={router} />

@@ -7,7 +7,7 @@ const apiKey = import.meta.env.VITE_APP_API_KEY
 export const fetchallUsers = createAsyncThunk('/u', async () => {
   try {
     const response = await axios.get(url, {
-      headers: { Authorization: `Bearer pixelrart@pixelrart0.ve6caat.` },
+      headers: { Authorization: `Bearer ${apiKey}` },
     })
     // Extract relevant headers
     const contentType = response.headers['content-type']
