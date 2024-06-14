@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 import store, { Persistor } from './store/store.js'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
-import App from './App.jsx'
 import './index.css'
+import App from './App.jsx'
 import Home from './pages/Home.jsx'
 import PixelrArtMainPage from './pages/Pixelrart-main.jsx'
 import AllPosts from './pages/shared/Posts.jsx'
@@ -96,9 +97,15 @@ const router = createBrowserRouter([
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={Persistor}>
-      <RouterProvider router={router} />
-    </PersistGate>
-  </Provider>
+  <GoogleOAuthProvider
+    clientId={
+      '221514232024-clun599k6q4kt7n6si1so2tnvif9ic34.apps.googleusercontent.com'
+    }
+  >
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={Persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
+    </Provider>
+  </GoogleOAuthProvider>
 )

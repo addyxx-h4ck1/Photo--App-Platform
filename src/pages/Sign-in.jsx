@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { validatePassword } from '../utils/validate-password'
 import AlertSuccess from '../components/Alert-success'
 import AlertWarning from '../components/Alert-warning'
 import axios from 'axios'
@@ -8,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { saveToken } from '../features/Login/user-login-slice'
 import Loader from '../components/Loader'
 import { disableLoading, enableLoading } from '../features/loading-slice'
+import { GoogleLogin } from '@react-oauth/google'
 
 const SignIn = () => {
   const dispatch = useDispatch()
@@ -128,6 +128,38 @@ const SignIn = () => {
                 />
               </div>
             )}
+            <div className="my-2">or continue with </div>
+            <GoogleLogin
+              size="large"
+              onSuccess={async (response) => {
+                let client = response
+                try {
+                  dispatch(enableLoading())
+                  const response = await axios.post(
+                    'https://auth-copiq6djm4es73a4js7g.onrender.com/auth/google',
+                    client
+                  )
+                  dispatch(disableLoading())
+                  dispatch(saveToken(response.data))
+                  popSuccess('welcome back')
+                  setTimeout(() => {
+                    navigate('/m/pixelrart/foryou', {
+                      preventScrollReset: true,
+                      state: response.data,
+                    })
+                  }, 2000)
+                } catch (error) {
+                  dispatch(disableLoading())
+                  if (error.response.status === 404)
+                    return showError('!oops user not registered')
+                  showError('oops internal server error , please try again')
+                }
+              }}
+              onError={() => {
+                console.log('login Failed')
+              }}
+              width={'100px'}
+            />
           </form>
           <div className="flex flex-col text-center justify-center items-center w-full gap-1 mb-3 mt-1 ">
             <Link to={'/auth/password-reset'} className="text-[royalblue]">
