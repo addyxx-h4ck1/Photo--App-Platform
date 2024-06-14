@@ -5,7 +5,6 @@ import { GoogleOAuthProvider } from '@react-oauth/google'
 import store, { Persistor } from './store/store.js'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
-const googleApiKey = import.meta.env.VITE_APP_GOOGLE_ID
 import './index.css'
 import App from './App.jsx'
 import Home from './pages/Home.jsx'
@@ -23,6 +22,7 @@ import SignIn from './pages/Sign-in.jsx'
 import ForgotPassword from './pages/Forgot-password.jsx'
 import PasswordEmailMessage from './pages/Password-reset-inst.jsx'
 import UserProfile from './pages/shared/User-profile.jsx'
+const googleApiKey = import.meta.env.VITE_APP_GOOGLE_ID
 
 const router = createBrowserRouter([
   {
