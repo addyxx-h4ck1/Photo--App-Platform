@@ -1,50 +1,69 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { data } from '../../assets/dummy'
+import React, { useEffect, useState } from 'react'
 import Post from '../../components/Post'
 import { useSelector } from 'react-redux'
+import axios from 'axios'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
 const AllPosts = () => {
+  const [loading, setIsLoading] = useState(false)
+  const [postData, setPostData] = useState(null)
+  const { T } = useSelector((state) => state.token)
+  useEffect(() => {
+    if (T) {
+      async function getPosts(t) {
+        setIsLoading(true)
+        let url = 'https://server2-copiq6djm4es73a4js7g.onrender.com/u/posts'
+        try {
+          let req = await axios.get(url, {
+            headers: { Authorization: `Bearer ${t.token}` },
+          })
+          setPostData(req.data)
+          setIsLoading(false)
+        } catch (error) {
+          console.log(error)
+          setIsLoading(false)
+        }
+      }
+      getPosts(T)
+      return
+    }
+  }, [T])
   return (
-    <section className="posts-parent duration-500 hover:duration-500 p-3 right-0 w-[45%] min-w-[350px]  flex items-center  flex-col gap-4">
-      <div className="flex flex-col">
-        {/* Filter category */}
-        <p className="mt-2 text-[#8080807e] text-center">filter</p>
-        <div className="posts-categories my-1 flex flex-wrap justify-center items-center gap-2">
-          <button className="py-2 px-3 bg-[#8080807e] rounded-xl portrait:text-xs text-sm duration-300 hover:duration-300 hover:bg-[#20abab] hover:text-[#1b1b1b]">
-            Ambient
-          </button>
-          <button className="py-2 px-3 bg-[#8080807e] rounded-xl portrait:text-xs text-sm duration-300 hover:duration-300 hover:bg-[#20abab] hover:text-[#1b1b1b]">
-            Ambient
-          </button>
-          <button className="py-2 px-3 bg-[#8080807e] rounded-xl portrait:text-xs text-sm duration-300 hover:duration-300 hover:bg-[#20abab] hover:text-[#1b1b1b]">
-            Ambient
-          </button>
-          <button className="py-2 px-3 bg-[#8080807e] rounded-xl portrait:text-xs text-sm duration-300 hover:duration-300 hover:bg-[#20abab] hover:text-[#1b1b1b]">
-            Ambient
-          </button>
-          <button className="py-2 px-3 bg-[#8080807e] rounded-xl portrait:text-xs text-sm duration-300 hover:duration-300 hover:bg-[#20abab] hover:text-[#1b1b1b]">
-            Ambient
-          </button>
-          <button className="py-2 px-3 bg-[#8080807e] rounded-xl portrait:text-xs text-sm duration-300 hover:duration-300 hover:bg-[#20abab] hover:text-[#1b1b1b]">
-            Ambient
-          </button>
-        </div>
-        {/* SEARCH POSTS */}
-        <form action="" className="flex w-[100%] mt-2">
-          <input
-            type="search"
-            placeholder="search for posts..."
-            className="py-3 px-5 rounded-tl-lg rounded-bl-lg bg-[#8080807e] outline-0 border-0 w-full"
-          />
-          <button className="py-3 px-5 rounded-tr-lg hover:duration-300 rounded-br-lg bg-[#8080807e] text-[#20abab] hover:text-[white] duration-300">
-            <i className="fa fa-search"></i>
-          </button>
-        </form>
-      </div>
-      {data.map((el) => {
-        return <Post key={el.img} {...el} />
-      })}
+    <section className="posts-parent duration-500 hover:duration-500 p-3 right-0 w-[50%] min-w-[350px]  flex items-center  flex-col gap-4">
+      <>
+        {loading ? (
+          <SkeletonTheme baseColor="#202020" highlightColor="#444">
+            <div className="post-card w-full flex flex-col gap-2 overflow-hidden">
+              <Skeleton height={70} width={70} circle={true} />
+              <div className="w-full flex">
+                <Skeleton count={2} height={20} width={600} />
+              </div>
+              <div className="w-full flex ">
+                <Skeleton height={120} width={600} />
+              </div>
+            </div>
+            <div className="post-card w-full flex flex-col gap-2 overflow-hidden">
+              <Skeleton height={70} width={70} circle={true} />
+              <div className="w-full flex">
+                <Skeleton count={2} height={20} width={600} />
+              </div>
+              <div className="w-full flex ">
+                <Skeleton height={120} width={600} />
+              </div>
+            </div>
+          </SkeletonTheme>
+        ) : (
+          <>
+            {postData ? (
+              <>
+                {postData.map((post) => {
+                  return <Post key={post._id} {...post} />
+                })}
+              </>
+            ) : null}
+          </>
+        )}
+      </>
     </section>
   )
 }
