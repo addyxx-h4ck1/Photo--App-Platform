@@ -39,6 +39,7 @@ const ProfileMenu = ({ ...userInfo }) => {
       </Link>
       <div className="w-full mb-3 flex flex-col ">
         <Link
+          to={'/m/pixelrart/create'}
           className="self-start rounded-lg hover:text-[#199898] hover:duration-300  duration-300 px-2 py-4 w-full font-semibold bg-bgPrimary text-sm mb-2"
           onClick={disableProfile}
         >
