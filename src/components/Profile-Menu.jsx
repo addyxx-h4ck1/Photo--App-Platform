@@ -46,6 +46,7 @@ const ProfileMenu = ({ ...userInfo }) => {
           Add post
         </Link>
         <Link
+          to={'/m/update'}
           className="self-start rounded-lg hover:text-[#199898] hover:duration-300  duration-300 px-2 py-4 w-full font-semibold bg-bgPrimary text-sm mb-2"
           onClick={disableProfile}
         >

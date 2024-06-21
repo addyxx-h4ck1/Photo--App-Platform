@@ -11,8 +11,10 @@ import Post from '../shared/profile-components/Post'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
 import axios from 'axios'
+import { fetchUser } from '../../features/Login/user-login-slice'
 
 const Profile = () => {
+  const dispatch = useDispatch()
   const [userPosts, setUserPost] = useState([])
   const [deletePost, setDeletePost] = useState(false)
   const [deletePostObject, setDeletePostObject] = useState(null)
@@ -84,6 +86,7 @@ const Profile = () => {
     photos,
     sFb,
     sIg,
+    email,
     sWhtpp,
     services,
     website,
@@ -109,7 +112,7 @@ const Profile = () => {
                   sWhtpp={sWhtpp}
                   sIg={sIg}
                 />
-                <About />
+                <About bio={bio} website={website} joined={joined} loc={loc} />
                 <Services services={services} />
               </section>
               <section className="profile-media-container profile-cont-photos sticky top-[60px]  bg-bgPrimary w-[40%] flex-grow p-2 h-[90vh] overflow-hidden overflow-y-auto">

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import 'react-loading-skeleton/dist/skeleton.css'
-import { useDispatch, useSelector } from 'react-redux'
 import Header from './profile-components/Header'
 import About from './profile-components/About'
 import Services from './profile-components/Services'
@@ -75,7 +74,12 @@ const UserProfile = () => {
                   sWhtpp={user.sWhtpp}
                   sIg={user.sIg}
                 />
-                <About />
+                <About
+                  bio={user.bio}
+                  website={user.website}
+                  joined={user.joined}
+                  loc={user.loc}
+                />
                 <Services services={user.services} />
               </section>
               <section className="profile-media-container profile-cont-photos sticky top-[60px]  bg-bgPrimary w-[40%] flex-grow p-2 h-[90vh] overflow-hidden overflow-y-auto">

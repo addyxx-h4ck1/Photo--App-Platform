@@ -1,13 +1,7 @@
-import {
-  format,
-  formatISO,
-  getISOWeekYear,
-  formatRFC7231,
-  toDate,
-} from 'date-fns'
-import { getDate } from 'date-fns/fp'
 import React, { useState } from 'react'
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import { SkeletonTheme } from 'react-loading-skeleton'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const Header = ({
   userName,
@@ -21,8 +15,9 @@ const Header = ({
   sIg,
   sWhtpp,
 }) => {
+  const navigate = useNavigate()
   const [loaded, setLoaded] = useState(false)
-
+  const { userInfo } = useSelector((state) => state.token)
   return (
     <article className="profile-top w-full relative bg-bgPrimary pb-2">
       {/* Profile cover photo */}
@@ -41,8 +36,8 @@ const Header = ({
       </SkeletonTheme>
 
       {/* Profile Leads (img, location, name ......) */}
-      <div className="profile-leads mt-2  px-4 w-full portrait:text-center">
-        <div className="profile-photo flex items-center portrait:flex-col portrait:gap-2 gap-6">
+      <div className="profile-leads mt-2  px-4 w-full">
+        <div className="profile-photo flex items-center flex-wrap portrait:gap-2 gap-6">
           <div className="fa fa-camera relative text-2xl cover-photo flex flex-col justify-center items-center w-[110px]  h-[110px] rounded-full portrait:h-[80px] portrait:w-[80px]  bg-bgPrimary">
             {pImg === 'fill' ? null : (
               <img
@@ -53,26 +48,33 @@ const Header = ({
             )}
           </div>
           <div className="profile-name text-center mt-4 portrait:mt-1 text-nowrap">
-            <h1 className="font-bold text-lg">
+            <h1 className="font-bold ">
               {brandName === 'fill' ? null : brandName}
             </h1>
             <p className="portrait:text-xs">{userName}</p>
           </div>
         </div>
         {/* profile-bio */}
-        <div className="mt-3">
-          <p className="portrait:text-sm">{bio === 'fill' ? null : bio}</p>
+        <p className="max-w-[700px] my-2">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus
+          accusamus veritatis sapiente, perspiciatis incidunt ipsam.
+        </p>
+        {/* Profile info action btns */}
+        <div className="profile-info-date-loc items-center flex-wrap flex gap-4 mt-5 border-b-2 border-[#63626255] pb-5 w-full text-nowrap portrait:text-sm portrait:text-center">
+          <button
+            className="py-1 px-3 border-[1px] font-semibold rounded-lg"
+            onClick={() => navigate('/m/update/')}
+          >
+            <i className="fa fa-edit"></i> Edit profile
+          </button>
+          <button
+            className="py-1 px-3 border-[1px] font-semibold rounded-lg"
+            onClick={() => navigate(`/m/profile/${userInfo._id}`)}
+          >
+            <i className="fa fa-eye"></i> View profile
+          </button>
         </div>
-        {/* Profile info (location, date-joined) */}
-        <div className="profile-info-date-loc flex gap-4 mt-5 border-b-2 border-[#63626255] pb-5 w-full text-nowrap portrait:text-sm portrait:text-center">
-          <p>
-            {loc === 'fill' ? null : (
-              <>
-                <i className="fa fa-location-dot"></i> {loc}
-              </>
-            )}
-          </p>
-        </div>
+        {/* Profile info action btns */}
         <div className="profile-links-date-loc flex gap-4 mt-3 border-b-2 border-[#63626255] pb-5 w-full text-nowrap flex-wrap">
           {sWhtpp === 'fill' ? null : (
             <>

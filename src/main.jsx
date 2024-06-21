@@ -22,6 +22,7 @@ import SignIn from './pages/Sign-in.jsx'
 import ForgotPassword from './pages/Forgot-password.jsx'
 import PasswordEmailMessage from './pages/Password-reset-inst.jsx'
 import UserProfile from './pages/shared/User-profile.jsx'
+import UpdateProfile from './pages/shared/Update-Profile.jsx'
 const googleApiKey = import.meta.env.VITE_APP_GOOGLE_ID
 
 const router = createBrowserRouter([
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
       {
         path: '/m/profile',
         element: <Profile />,
+      },
+      {
+        path: '/m/update',
+        element: <UpdateProfile />,
       },
       {
         path: '/m/profile/:user_Id',
