@@ -8,6 +8,7 @@ import LoadingData from '../../components/Data-loading'
 import { fetchUser } from '../../features/Login/user-login-slice'
 
 const UpdateProfile = () => {
+  const [bioCount, setBioCount] = useState(0)
   const { userInfo } = useSelector((state) => state.token)
   const { T } = useSelector((state) => state.token)
   const dispatch = useDispatch()
@@ -82,7 +83,7 @@ const UpdateProfile = () => {
     <>
       {T ? (
         <>
-          <section className="proile-edit flex justify-center relative mx-2">
+          <section className="proile-edit flex justify-center relative mx-2 portrait:text-sm">
             <article className="max-w-[900px] w-full p-2 py-2 bg-bgPrimary my-2 rounded-lg">
               <section className="sticky top-[50px] py-4 flex justify-center items-center bg-primary rounded-lg mb-2">
                 {showWarning ? <AlertWarning warning={warningMessage} /> : null}
@@ -109,7 +110,7 @@ const UpdateProfile = () => {
                 />
                 <div className="">
                   <Link to={`/m/profile/${userInfo._id}`}>
-                    {userInfo.brandName}
+                    {userInfo.brandName === 'fill' ? null : userInfo.brandName}
                   </Link>{' '}
                   <p className="">{userInfo.userName}</p>
                 </div>
@@ -119,6 +120,11 @@ const UpdateProfile = () => {
               </i>
               <hr />
               {/* form */}
+              <p className="w-full portrait:text-sm text-center my-2">
+                To completely remove a field type{' '}
+                <i className="underline">'fill'</i> in the input field and save
+                changes and it will be removed
+              </p>
               <form className="my-3" onSubmit={(e) => updateProfile(e)}>
                 {/* Account Info */}
                 <h1 className="font-semibold text-lg">Account info</h1>
@@ -126,7 +132,7 @@ const UpdateProfile = () => {
                   These details identifies your account in the servers, some of
                   them cannot be changed
                 </i>
-                <div className="account-info-edit my-2 flex flex-wrap gap-2">
+                <div className="account-info-edit my-2 flex flex-wrap gap-4">
                   <div className="flex flex-col flex-grow gap-1 ">
                     <label htmlFor="username" className="font-semibold text-sm">
                       <i>
@@ -150,7 +156,11 @@ const UpdateProfile = () => {
                       ref={brandNameRef}
                       id="brandName"
                       name="brandName"
-                      placeholder={userInfo.brandName}
+                      placeholder={
+                        userInfo.brandName === 'fill'
+                          ? 'Create a brand name for your platform'
+                          : userInfo.brandName
+                      }
                       className="py-3 px-5 rounded-lg outline-none border-0 text-[aqua]"
                     />
                   </div>
@@ -168,23 +178,34 @@ const UpdateProfile = () => {
                       className="py-3 px-5 rounded-lg outline-none border-0 text-[aqua]"
                     />
                   </div>
-                  <div className="flex flex-col flex-grow gap-1 ">
-                    <label htmlFor="username" className="font-semibold text-sm">
-                      <i>Bio (max 80 char)</i>
-                    </label>
-                    <textarea
-                      id="bio"
-                      name="bio"
-                      ref={bioRef}
-                      placeholder={userInfo.bio}
-                      className="py-3 px-5 rounded-lg outline-none border-0 text-[aqua] h-[150px] "
-                    ></textarea>
-                  </div>
+                </div>
+                {/* Bio */}
+                <h1 className="font-semibold text-lg mt-2">Bio</h1>
+                <i>Tell people about yourself and your brand (max 150 char)</i>
+                <div className="flex flex-col flex-grow gap-1 mt-2">
+                  <label htmlFor="username" className="font-semibold text-sm">
+                    <i>
+                      Bio <span className="text-[aqua]">{bioCount}/200</span>
+                    </i>
+                  </label>
+                  <textarea
+                    id="bio"
+                    name="bio"
+                    maxLength={200}
+                    onChange={() => setBioCount(bioRef.current.value.length)}
+                    ref={bioRef}
+                    placeholder={
+                      userInfo.bio === 'fill'
+                        ? 'let people trust and know you better'
+                        : userInfo.bio
+                    }
+                    className="py-3 px-5 rounded-lg outline-none border-0 text-[aqua] h-[150px] "
+                  ></textarea>
                 </div>
                 {/* Additional User info */}
                 <h1 className="font-semibold text-lg pt-2">Additional Info</h1>
 
-                <div className="account-info-edit my-2 flex flex-wrap gap-2">
+                <div className="account-info-edit my-2 flex flex-wrap gap-4">
                   <div className="flex flex-col flex-grow gap-1 ">
                     <label htmlFor="username" className="font-semibold text-sm">
                       <i>Website</i>
@@ -194,7 +215,11 @@ const UpdateProfile = () => {
                       ref={websiteRef}
                       id="website"
                       name="website"
-                      placeholder={userInfo.website}
+                      placeholder={
+                        userInfo.website === 'fill'
+                          ? 'your website link'
+                          : userInfo.website
+                      }
                       className="py-3 px-5 rounded-lg outline-none border-0 text-[aqua]"
                     />
                   </div>
@@ -207,7 +232,11 @@ const UpdateProfile = () => {
                       ref={locationRef}
                       id="loc"
                       name="loc"
-                      placeholder={userInfo.loc}
+                      placeholder={
+                        userInfo.loc === 'fill'
+                          ? 'where are you located?'
+                          : userInfo.loc
+                      }
                       className="py-3 px-5 rounded-lg outline-none border-0 text-[aqua]"
                     />
                   </div>
@@ -215,7 +244,7 @@ const UpdateProfile = () => {
                 {/* social Media */}
                 <h1 className="font-semibold text-lg pt-2">Social Media</h1>
                 <i>Provide the full profile link to avoid broken links.</i>
-                <div className="account-info-edit my-2 flex flex-wrap gap-2">
+                <div className="account-info-edit my-2 flex flex-wrap gap-4">
                   <div className="flex flex-col flex-grow gap-1 ">
                     <label htmlFor="username" className="font-semibold text-sm">
                       <i className="fa-brands fa-facebook text-[#0000ff]"></i>{' '}
@@ -226,7 +255,9 @@ const UpdateProfile = () => {
                       ref={sFbRef}
                       id="sFb"
                       name="sFb"
-                      placeholder={userInfo.sFb}
+                      placeholder={
+                        userInfo.sFb === 'fill' ? 'add facebook' : userInfo.sFb
+                      }
                       className="py-3 px-5 rounded-lg outline-none border-0 text-[aqua]"
                     />
                   </div>
@@ -240,7 +271,9 @@ const UpdateProfile = () => {
                       ref={sIgRef}
                       id="sIg"
                       name="sIg"
-                      placeholder={userInfo.sIg}
+                      placeholder={
+                        userInfo.sIg === 'fill' ? 'add Instagram' : userInfo.sIg
+                      }
                       className="py-3 px-5 rounded-lg outline-none border-0 text-[aqua]"
                     />
                   </div>
@@ -254,32 +287,16 @@ const UpdateProfile = () => {
                       id="sWhttp"
                       name="sWhttp"
                       ref={sWhtppRef}
-                      placeholder={userInfo.sWhtpp}
+                      placeholder={
+                        userInfo.sWhtpp === 'fill'
+                          ? 'add Whatsapp'
+                          : userInfo.sWhtpp
+                      }
                       className="py-3 px-5 rounded-lg outline-none border-0 text-[aqua]"
                     />
                   </div>
                 </div>
                 {/* Services */}
-                <h1 className="font-semibold text-lg pt-2">Services</h1>
-                <i>
-                  Add all the services you offer, (separate each service with a
-                  space e.g photography Editing)
-                </i>
-                <div className="account-info-edit my-2 flex flex-wrap gap-2">
-                  <div className="flex flex-col flex-grow gap-1 ">
-                    <label htmlFor="username" className="font-semibold text-sm">
-                      <i>Services (separate each by a space)</i>
-                    </label>
-                    <input
-                      type="text"
-                      id="services"
-                      name="services"
-                      ref={servicesRef}
-                      placeholder={'List services'}
-                      className="py-3 px-5 rounded-lg outline-none border-0 text-[aqua]"
-                    />
-                  </div>
-                </div>
 
                 {/* action buttons */}
                 <div className="flex gap-3 w-full justify-around items-center my-8">

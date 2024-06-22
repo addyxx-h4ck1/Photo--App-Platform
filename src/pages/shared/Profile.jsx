@@ -111,6 +111,7 @@ const Profile = () => {
                   sFb={sFb}
                   sWhtpp={sWhtpp}
                   sIg={sIg}
+                  website={website}
                 />
                 <About bio={bio} website={website} joined={joined} loc={loc} />
                 <Services services={services} />

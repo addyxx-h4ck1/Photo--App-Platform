@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { SkeletonTheme } from 'react-loading-skeleton'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const Header = ({
   userName,
@@ -14,8 +14,10 @@ const Header = ({
   sFb,
   sIg,
   sWhtpp,
+  website,
 }) => {
   const navigate = useNavigate()
+  const params = useParams()
   const [loaded, setLoaded] = useState(false)
   const { userInfo } = useSelector((state) => state.token)
   return (
@@ -55,31 +57,42 @@ const Header = ({
           </div>
         </div>
         {/* profile-bio */}
-        <p className="max-w-[700px] my-2">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus
-          accusamus veritatis sapiente, perspiciatis incidunt ipsam.
+        <p className="max-w-[700px] my-1 portrait:text-sm">
+          {bio === 'fill' ? null : bio}
         </p>
-        {/* Profile info action btns */}
-        <div className="profile-info-date-loc items-center flex-wrap flex gap-4 mt-5 border-b-2 border-[#63626255] pb-5 w-full text-nowrap portrait:text-sm portrait:text-center">
-          <button
-            className="py-1 px-3 border-[1px] font-semibold rounded-lg"
-            onClick={() => navigate('/m/update/')}
+        {/* profile-website */}
+        {website === 'fill' ? null : (
+          <a
+            href={website}
+            target="_blank"
+            className="max-w-[700px] portrait:text-sm text-blue-600 hover:underline duration-300 hover:duration-300"
           >
-            <i className="fa fa-edit"></i> Edit profile
-          </button>
-          <button
-            className="py-1 px-3 border-[1px] font-semibold rounded-lg"
-            onClick={() => navigate(`/m/profile/${userInfo._id}`)}
-          >
-            <i className="fa fa-eye"></i> View profile
-          </button>
-        </div>
+            <i className="fa fa-link"></i> {website}
+          </a>
+        )}
         {/* Profile info action btns */}
-        <div className="profile-links-date-loc flex gap-4 mt-3 border-b-2 border-[#63626255] pb-5 w-full text-nowrap flex-wrap">
+        {params.user_Id ? null : (
+          <div className="profile-info-date-loc items-center flex-wrap flex gap-4 mt-5 border-b-2 border-[#63626255] pb-5 w-full text-nowrap portrait:text-sm portrait:text-center">
+            <button
+              className="py-1 px-3 border-[1px] font-semibold rounded-lg"
+              onClick={() => navigate('/m/update/')}
+            >
+              <i className="fa fa-edit"></i> Edit profile
+            </button>
+            <button
+              className="py-1 px-3 border-[1px] font-semibold rounded-lg"
+              onClick={() => navigate(`/m/profile/${userInfo._id}`)}
+            >
+              <i className="fa fa-eye"></i> View profile
+            </button>
+          </div>
+        )}
+        {/* Profile info action btns */}
+        <div className="profile-links-date-loc flex gap-2 mt-3 border-b-2 border-[#63626255] pb-5 w-full text-nowrap flex-wrap">
           {sWhtpp === 'fill' ? null : (
             <>
               <a href={sWhtpp} target="_blank">
-                <button className="py-3 px-4 bg-[#39a539] rounded-lg font-semibold duration-300 hover:duration-300 hover:text-[#32b832] border-2 border-[#32b832] hover:bg-transparent">
+                <button className="py-2 px-2 text-sm bg-[#39a539] rounded-lg font-semibold duration-300 hover:duration-300 hover:text-[#32b832] border-2 border-[#32b832] hover:bg-transparent">
                   <i className="fa-brands fa-whatsapp"></i> whatsapp
                 </button>
               </a>
@@ -88,7 +101,7 @@ const Header = ({
           {sFb === 'fill' ? null : (
             <>
               <a href={sFb} target="_blank">
-                <button className="py-3 px-4 bg-[royalblue] rounded-lg font-semibold duration-300 hover:duration-300 hover:text-[royalblue] border-2 border-[royalblue] hover:bg-transparent">
+                <button className="py-2 px-2 text-sm bg-[royalblue] rounded-lg font-semibold duration-300 hover:duration-300 hover:text-[royalblue] border-2 border-[royalblue] hover:bg-transparent">
                   <i className="fa-brands fa-facebook"></i> facebook
                 </button>
               </a>
@@ -97,7 +110,7 @@ const Header = ({
           {sIg === 'fill' ? null : (
             <>
               <a href={sIg} target="_blank">
-                <button className="instagram py-3 px-4 rounded-lg font-semibold">
+                <button className="instagram py-2 px-2 text-sm rounded-lg font-semibold">
                   <i className="fa-brands fa-instagram"></i> instagram
                 </button>
               </a>

@@ -11,8 +11,6 @@ const About = ({ bio, website, joined, loc }) => {
   return (
     <article className="about-profile bg-bgPrimary mt-3 w-full p-4">
       <h1 className="font-bold text-lg my-2">About</h1>
-      {/* bio */}
-      {bio === 'fill' ? null : <p className="portrait:text-xs">{bio}</p>}
       <div className="my-3 flex flex-col gap-2">
         {/* location */}
         {loc === 'fill' ? null : (

@@ -73,6 +73,7 @@ const UserProfile = () => {
                   sFb={user.sFb}
                   sWhtpp={user.sWhtpp}
                   sIg={user.sIg}
+                  website={user.website}
                 />
                 <About
                   bio={user.bio}
